@@ -18,15 +18,15 @@ const routes: Routes = [
       {path: 'dashboard', component: DashboardComponent, title: 'SB Admin 2 - Dashboard'},
       {path: 'page1', component: Page1Component, title: 'SB Admin 2 - Page1'},
       {path: 'page2', component: Page2Component, title: 'SB Admin 2 - Page2'},
-      {
-        path: 'utilities',
-        children: [
-          { path: 'colors/:type', component: ColorsComponent, data: { key: 'value' } },
-        ]
-      },
+      // {
+      //   path: 'utilities',
+      //   children: [
+      //     { path: 'colors/:type', component: ColorsComponent, data: { key: 'value' } },
+      //   ]
+      // },
+      { path: 'utilities', loadChildren: () => import('./utilities/utilities.module').then(m => m.UtilitiesModule) },
     ]
   },
-  { path: 'utilities', loadChildren: () => import('./utilities/utilities.module').then(m => m.UtilitiesModule) },
   // {path: '**', component: NotFoundComponent},
 ];
 
