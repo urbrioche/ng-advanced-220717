@@ -15,7 +15,7 @@ export class ColorsComponent implements OnInit {
 
   ngOnInit(): void {
     // 這個寫法改網址不會變
-    this.type = this.route.snapshot.paramMap.get('type');
+    // this.type = this.route.snapshot.paramMap.get('type');
     this.route.paramMap.subscribe(param => {
       this.type = param.get('type');
     });
@@ -29,4 +29,23 @@ export class ColorsComponent implements OnInit {
     });
   }
 
+  plus() {
+    let num = Number(this.type);
+    if (num) {
+      // this.type = `${++num}`;
+      this.router.navigate(['/utilities/colors', ++num], {
+        queryParamsHandling: 'merge',
+      });
+    }
+  }
+
+  minus() {
+    let num = Number(this.type);
+    if (num) {
+      // this.type = `${--num}`;
+      this.router.navigate(['/utilities/colors', --num], {
+        queryParamsHandling: 'merge',
+      });
+    }
+  }
 }
