@@ -26,6 +26,7 @@ const routes: Routes = [
       },
     ]
   },
+  { path: 'utilities', loadChildren: () => import('./utilities/utilities.module').then(m => m.UtilitiesModule) },
   // {path: '**', component: NotFoundComponent},
 ];
 
