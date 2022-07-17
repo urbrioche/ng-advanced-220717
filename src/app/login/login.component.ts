@@ -1,4 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   templateUrl: './login.component.html',
@@ -7,7 +8,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 export class LoginComponent implements OnInit, OnDestroy {
   private origBodyClass = document.body.className;
 
-  constructor() {
+  constructor(private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -18,4 +19,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     document.body.className = this.origBodyClass;
   }
 
+  doLogin() {
+    localStorage.setItem('apikey', 'TEST');
+    const url = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
+    this.router.navigateByUrl(url);
+  }
 }
