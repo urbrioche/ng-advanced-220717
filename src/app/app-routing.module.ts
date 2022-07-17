@@ -7,6 +7,7 @@ import {NotFoundComponent} from "./not-found/not-found.component";
 import {ColorsComponent} from "./utilities/colors/colors.component";
 import {LayoutComponent} from "./layout/layout.component";
 import {LoginComponent} from "./login/login.component";
+import {AuthGuard} from "./auth.guard";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -24,7 +25,11 @@ const routes: Routes = [
       //     { path: 'colors/:type', component: ColorsComponent, data: { key: 'value' } },
       //   ]
       // },
-      { path: 'utilities', loadChildren: () => import('./utilities/utilities.module').then(m => m.UtilitiesModule) },
+      {
+        path: 'utilities',
+        canActivate: [AuthGuard],
+        loadChildren: () => import('./utilities/utilities.module').then(m => m.UtilitiesModule)
+      },
     ]
   },
   // {path: '**', component: NotFoundComponent},
