@@ -21,12 +21,12 @@ const routes: Routes = [
       {
         path: 'utilities',
         children: [
-          {path: 'colors', component: ColorsComponent}
+          {path: 'colors/:type', component: ColorsComponent}
         ]
       },
     ]
   },
-  {path: '**', component: NotFoundComponent},
+  // {path: '**', component: NotFoundComponent},
 ];
 
 @NgModule({
