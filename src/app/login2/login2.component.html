@@ -12,18 +12,18 @@
                 <div class="text-center">
                   <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                 </div>
-<pre>data = {{ data | json }}
-form.value = {{ form.value | json }}
-form.valid = {{ form.valid }}
-form.invalid = {{ form.invalid }}
-form.touched = {{ form.touched }}
-form.untouched = {{ form.untouched }}
-form.pristine = {{ form.pristine }}
-form.dirty = {{ form.dirty }}
-form.enabled = {{ form.enabled }}
-form.disabled = {{ form.disabled }}
-form.status = {{ form.status }}
-form.errors = {{ form.errors | json }}</pre>
+                <pre>data = {{ data | json }}
+                  form.value = {{ form.value | json }}
+                  form.valid = {{ form.valid }}
+                  form.invalid = {{ form.invalid }}
+                  form.touched = {{ form.touched }}
+                  form.untouched = {{ form.untouched }}
+                  form.pristine = {{ form.pristine }}
+                  form.dirty = {{ form.dirty }}
+                  form.enabled = {{ form.enabled }}
+                  form.disabled = {{ form.disabled }}
+                  form.status = {{ form.status }}
+                  form.errors = {{ form.errors | json }}</pre>
                 <form class="user" [formGroup]="form">
                   <div class="form-group">
                     <input
@@ -34,17 +34,17 @@ form.errors = {{ form.errors | json }}</pre>
                       placeholder="Enter Email Address..."
                       formControlName="email"
                     />
-<pre>fc('email').value = {{ fc('email').value }}
-fc('email').valid = {{ fc('email').valid }}
-fc('email').invalid = {{ fc('email').invalid }}
-fc('email').touched = {{ fc('email').touched }}
-fc('email').untouched = {{ fc('email').untouched }}
-fc('email').pristine = {{ fc('email').pristine }}
-fc('email').dirty = {{ fc('email').dirty }}
-fc('email').enabled = {{ fc('email').enabled }}
-fc('email').disabled = {{ fc('email').disabled }}
-fc('email').status = {{ fc('email').status }}
-fc('email').errors = {{ fc('email').errors | json }}</pre>
+                    <pre>fc('email').value = {{ fc('email').value }}
+                      fc('email').valid = {{ fc('email').valid }}
+                      fc('email').invalid = {{ fc('email').invalid }}
+                      fc('email').touched = {{ fc('email').touched }}
+                      fc('email').untouched = {{ fc('email').untouched }}
+                      fc('email').pristine = {{ fc('email').pristine }}
+                      fc('email').dirty = {{ fc('email').dirty }}
+                      fc('email').enabled = {{ fc('email').enabled }}
+                      fc('email').disabled = {{ fc('email').disabled }}
+                      fc('email').status = {{ fc('email').status }}
+                      fc('email').errors = {{ fc('email').errors | json }}</pre>
                   </div>
                   <div class="form-group">
                     <input
@@ -68,15 +68,41 @@ fc('email').errors = {{ fc('email').errors | json }}</pre>
                       >
                     </div>
                   </div>
+
+                  <hr>
+                  <h1>Profiles</h1>
+
+                  <ng-container formArrayName="profiles">
+                    <ng-container *ngFor="let profile of form.controls.profiles.controls; let i=index" [formGroupName]="i">
+                      <h2>{{i+1}}</h2>
+                      <div class="form-group">
+                        <input
+                          type="text"
+                          class="form-control form-control-user"
+                          placeholder="請輸入城市"
+                          formControlName="city"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <input
+                          type="text"
+                          class="form-control form-control-user"
+                          placeholder="請輸入電話"
+                          formControlName="tel"
+                        />
+                      </div>
+                    </ng-container>
+                  </ng-container>
+
                   <a
                     href="index.html"
                     class="btn btn-primary btn-user btn-block"
                   >
                     Login
                   </a>
-                  <hr />
+                  <hr/>
                   <button (click)="resetForm()"
-                    class="btn btn-google btn-user btn-block"
+                          class="btn btn-google btn-user btn-block"
                   >
                     Reset Form
                   </button>
@@ -87,7 +113,7 @@ fc('email').errors = {{ fc('email').errors | json }}</pre>
                     <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
                   </a>
                 </form>
-                <hr />
+                <hr/>
                 <div class="text-center">
                   <a class="small" href="forgot-password.html"
                   >Forgot Password?</a
