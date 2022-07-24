@@ -28,14 +28,8 @@ export class Login2Component implements OnInit {
     }),
     isRememberMe: this.fb.control(true, {}),
     profiles: this.fb.array([
-      this.fb.group({
-        city: this.fb.control('Taipei', {validators: [Validators.required]}),
-        tel: this.fb.control('0988-888888', {validators: [Validators.required]})
-      }),
-      this.fb.group({
-        city: this.fb.control('Taichung', {validators: [Validators.required]}),
-        tel: this.fb.control('0944-444444', {validators: [Validators.required]})
-      }),
+      this.makeProfile('Taipei', '0988-888888'),
+      this.makeProfile('Taichung', '0944-444444'),
     ])
   })
 
@@ -97,5 +91,16 @@ export class Login2Component implements OnInit {
   // }
   resetForm() {
     this.form.reset(this.data);
+  }
+
+  makeProfile(city: string, tel: string) {
+    return this.fb.group({
+      city: this.fb.control(city, {validators: [Validators.required]}),
+      tel: this.fb.control(tel, {validators: [Validators.required]})
+    })
+  }
+
+  addProfile() {
+    this.form.controls.profiles.push(this.makeProfile('', ''))
   }
 }
