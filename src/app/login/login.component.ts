@@ -1,5 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
+import {NgModel} from "@angular/forms";
 
 @Component({
   templateUrl: './login.component.html',
@@ -9,7 +10,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   private origBodyClass = document.body.className;
   data: any = {
     email: '',
-    password: '123',
+    password: '',
     isRememberMe: true,
   }
 
@@ -29,4 +30,13 @@ export class LoginComponent implements OnInit, OnDestroy {
     const url = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
     this.router.navigateByUrl(url);
   }
+
+  isInvalid(control: NgModel){
+    return control.invalid && control.touched;
+  }
+
+  isValid(control: NgModel){
+    return control.valid;
+  }
+
 }
