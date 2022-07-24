@@ -103,10 +103,10 @@ export class Login2Component implements OnInit {
     });
   }
 
-  doLogin(form: FormGroupDirective) {
-    if (form.valid) {
+  doLogin() {
+    if (this.form.valid) {
       localStorage.setItem('apikey', 'TEST');
-      var url = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
+      const url = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
       this.router.navigateByUrl(url);
       this.router.navigate(['/'], {
         state: {},
