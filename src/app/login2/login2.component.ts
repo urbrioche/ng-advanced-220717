@@ -7,7 +7,7 @@ import {FormBuilder, UntypedFormGroup} from "@angular/forms";
   styleUrls: ['./login2.component.css']
 })
 export class Login2Component implements OnInit {
-  data: any = {
+  data = {
     email: 'user@example.com',
     password: '123123',
     isRememberMe: true,
@@ -15,15 +15,13 @@ export class Login2Component implements OnInit {
 
   orig_body_className = document.body.className;
 
-  form!: UntypedFormGroup;
+  form = this.fb.group(this.data);
 
   constructor(private router: Router, private route: ActivatedRoute, private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
     document.body.className = 'bg-gradient-primary';
-
-    this.form = this.fb.group(this.data);
   }
 
   ngOnDestroy(): void {
