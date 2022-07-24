@@ -5,7 +5,7 @@ export function forbiddenPassword(control: AbstractControl) {
     return null;
   }
   let words = ['will', 'duotify', '123'];
-  const result = words.includes(control.value);
+  const result = words.some(x => control.value.indexOf(x) >= 0);
   if (result) {
     return {forbiddenPassword: true};
   } else {
