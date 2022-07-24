@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {NgModel} from "@angular/forms";
+import {NgForm, NgModel} from "@angular/forms";
 
 @Component({
   templateUrl: './login.component.html',
@@ -26,14 +26,19 @@ export class LoginComponent implements OnInit, OnDestroy {
     document.body.className = this.origBodyClass;
   }
 
-  doLogin() {
-    localStorage.setItem('apikey', 'TEST');
-    const url = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
-    this.router.navigateByUrl(url);
+  doLogin(form: NgForm) {
+    if (form.valid) {
+      localStorage.setItem('apikey', 'TEST');
+      const url = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
+      this.router.navigateByUrl(url);
+      this.router.navigate(['/'], {
+        state: {},
+      });
+    }
   }
 
-  isInvalid(control: NgModel) {
-    return control.invalid && control.touched;
+  isInvalid(control: NgModel, form: NgForm) {
+    return control.invalid && (control.touched || form.submitted);
   }
 
   isValid(control: NgModel) {
