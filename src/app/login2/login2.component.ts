@@ -18,7 +18,7 @@ export class Login2Component implements OnInit {
 
   // form = this.fb.group(this.data);
   form = this.fb.group({
-    email: this.fb.control('', {
+    email: this.fb.nonNullable.control('', {
       validators: [Validators.required, Validators.email],
       updateOn: 'blur',
     }),
