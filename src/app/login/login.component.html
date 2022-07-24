@@ -12,12 +12,24 @@
                 <div class="text-center">
                   <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                 </div>
-                <form class="user">
+<pre>form.name = {{ form.name }}
+form.value = {{ form.value | json }}
+form.valid = {{ form.valid }}
+form.invalid = {{ form.invalid }}
+form.touched = {{ form.touched }}
+form.untouched = {{ form.untouched }}
+form.pristine = {{ form.pristine }}
+form.dirty = {{ form.dirty }}
+form.enabled = {{ form.enabled }}
+form.disabled = {{ form.disabled }}
+form.status = {{ form.status }}
+form.errors = {{ form.errors | json }}</pre>
+                <form class="user" #form="ngForm" (ngSubmit)="doLogin(form)">
                   <div class="form-group">
                     <input
                       type="email"
                       class="form-control form-control-user"
-                      [class.is-invalid]="isInvalid(mEmail)"
+                      [class.is-invalid]="isInvalid(mEmail, form)"
                       [class.is-valid]="isValid(mEmail)"
                       id="exampleInputEmail"
                       aria-describedby="emailHelp"
@@ -29,7 +41,7 @@
                       email
                       minlength="5"
                     />
-                    <p class="invalid-feedback" *ngIf="isInvalid(mEmail) && mEmail.errors?.['required']">請輸入 Email 地址
+                    <p class="invalid-feedback" *ngIf="isInvalid(mEmail, form) && mEmail.errors?.['required']">請輸入 Email 地址
                       (帳號)</p>
                     <p class="invalid-feedback" *ngIf="isValid(mEmail) && mEmail.errors?.['email']">請輸入合法的 Email 地址</p>
 <pre>mEmail.name = {{ mEmail.name }}
@@ -48,7 +60,7 @@ mEmail.errors = {{ mEmail.errors | json }}</pre>
                     <input
                       type="password"
                       class="form-control form-control-user"
-                      [class.is-invalid]="isInvalid(mPassword)"
+                      [class.is-invalid]="isInvalid(mPassword, form)"
                       [class.is-valid]="isValid(mPassword)"
                       id="exampleInputPassword"
                       placeholder="Password"
@@ -76,7 +88,7 @@ mEmail.errors = {{ mEmail.errors | json }}</pre>
                     </div>
                   </div>
                   <button
-                    (click)="doLogin()"
+                    type="submit"
                     class="btn btn-primary btn-user btn-block"
                   >
                     Login
