@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FormArray, FormBuilder, FormControl, FormGroup, UntypedFormGroup} from "@angular/forms";
+import {FormArray, FormBuilder, FormControl, FormGroup, UntypedFormGroup, Validators} from "@angular/forms";
 
 @Component({
   templateUrl: './login2.component.html',
@@ -15,18 +15,34 @@ export class Login2Component implements OnInit {
 
   orig_body_className = document.body.className;
 
-  form = this.fb.group(this.data);
+  // form = this.fb.group(this.data);
+  form = this.fb.group({
+    email: this.fb.control('', {
+      validators: [Validators.required, Validators.email],
+      updateOn: 'blur',
+    }),
+    password: this.fb.control('', {
+      validators: [Validators.required, Validators.minLength(6), Validators.maxLength(32)]
+    }),
+    isRememberMe: this.fb.control(true, {})
+  })
 
   constructor(private router: Router, private route: ActivatedRoute, private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
     document.body.className = 'bg-gradient-primary';
+
+    // 模擬從後段拿資料
+    setTimeout(() => {
+      this.form.setValue(this.data);
+    }, 2000)
   }
 
   ngOnDestroy(): void {
     document.body.className = this.orig_body_className;
   }
+
   fc(name: string) {
     return this.form.get(name) as FormControl;
   }
@@ -38,6 +54,7 @@ export class Login2Component implements OnInit {
   fa(name: string) {
     return this.form.get(name) as FormArray;
   }
+
   // doLogin(form: NgForm) {
   //   if (form.valid) {
   //     localStorage.setItem('apikey', 'TEST');
