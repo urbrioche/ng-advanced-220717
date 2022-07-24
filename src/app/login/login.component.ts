@@ -12,6 +12,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     email: '',
     password: '',
     isRememberMe: true,
+    tab1: {
+      addr: '',
+      zip: '',
+    }
   }
 
   constructor(private router: Router, private route: ActivatedRoute) {
@@ -41,4 +45,11 @@ export class LoginComponent implements OnInit, OnDestroy {
     return control.valid;
   }
 
+  disableField(control: NgModel) {
+    if (control.disabled) {
+      control.control.enable();
+    } else {
+      control.control.disable();
+    }
+  }
 }
