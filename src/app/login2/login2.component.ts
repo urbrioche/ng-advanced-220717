@@ -1,6 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FormArray, FormBuilder, FormControl, FormGroup, UntypedFormGroup, Validators} from "@angular/forms";
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormGroupDirective,
+  NgForm,
+  UntypedFormGroup,
+  Validators
+} from "@angular/forms";
 
 @Component({
   templateUrl: './login2.component.html',
@@ -94,16 +103,16 @@ export class Login2Component implements OnInit {
     });
   }
 
-  // doLogin(form: NgForm) {
-  //   if (form.valid) {
-  //     localStorage.setItem('apikey', 'TEST');
-  //     var url = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
-  //     this.router.navigateByUrl(url);
-  //     this.router.navigate(['/'], {
-  //       state: {},
-  //     });
-  //   }
-  // }
+  doLogin(form: FormGroupDirective) {
+    if (form.valid) {
+      localStorage.setItem('apikey', 'TEST');
+      var url = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
+      this.router.navigateByUrl(url);
+      this.router.navigate(['/'], {
+        state: {},
+      });
+    }
+  }
 
   // isInvalid(control: NgModel, form: NgForm) {
   //   return control.invalid && (control.touched || form.submitted);
