@@ -1,29 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {
-  AbstractControl,
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  FormGroupDirective,
-  NgForm,
-  UntypedFormGroup,
-  Validators
-} from "@angular/forms";
-
-function forbiddenPassword(control: AbstractControl) {
-  if (!control.value) {
-    return null;
-  }
-  let words = ['will', 'duotify', '123'];
-  const result = words.includes(control.value);
-  if (result) {
-    return {forbiddenPassword: true};
-  } else {
-    return null;
-  }
-}
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {forbiddenPassword} from "./forbiddenPassword";
 
 @Component({
   templateUrl: './login2.component.html',
