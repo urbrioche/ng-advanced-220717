@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {
+  AbstractControl,
   FormArray,
   FormBuilder,
   FormControl,
@@ -10,6 +11,19 @@ import {
   UntypedFormGroup,
   Validators
 } from "@angular/forms";
+
+function forbiddenPassword(control: AbstractControl) {
+  if (!control.value) {
+    return null;
+  }
+  let words = ['will', 'duotify', '123'];
+  const result = words.includes(control.value);
+  if (result) {
+    return {forbiddenPassword: true};
+  } else {
+    return null;
+  }
+}
 
 @Component({
   templateUrl: './login2.component.html',
@@ -46,7 +60,12 @@ export class Login2Component implements OnInit {
       updateOn: 'blur',
     }),
     password: this.fb.control('', {
-      validators: [Validators.required, Validators.minLength(6), Validators.maxLength(32)]
+      validators: [
+        Validators.required,
+        Validators.minLength(6),
+        Validators.maxLength(32),
+        forbiddenPassword,
+      ]
     }),
     isRememberMe: this.fb.control(true, {}),
     profiles: this.fb.array([
