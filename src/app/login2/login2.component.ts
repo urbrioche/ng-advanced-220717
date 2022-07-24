@@ -12,6 +12,20 @@ export class Login2Component implements OnInit {
     password: '123123',
     // city: 'Taipei',
     isRememberMe: true,
+    profiles: [
+      {
+        city: 'Taipei',
+        tel: '0988-888888'
+      },
+      {
+        city: 'Taichung',
+        tel: '0944-444444'
+      },
+      {
+        city: 'Kaohsiung',
+        tel: '0911-111111'
+      },
+    ]
   };
 
   orig_body_className = document.body.className;
@@ -41,7 +55,11 @@ export class Login2Component implements OnInit {
     // 模擬從後段拿資料
     setTimeout(() => {
       // this.form.setValue(this.data);
-      this.form.patchValue(this.data);
+      // this.form.patchValue(this.data);
+      this.form.controls.profiles.clear();
+      this.data.profiles.forEach(profile => {
+        this.form.controls.profiles.push(this.makeProfile(profile.city, profile.tel));
+      })
     }, 2000)
   }
 
