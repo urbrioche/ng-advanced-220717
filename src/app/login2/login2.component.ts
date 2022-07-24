@@ -10,7 +10,8 @@ export class Login2Component implements OnInit {
   data = {
     email: 'user@example.com',
     password: '123123',
-    isRememberMe: true
+    isRememberMe: true,
+    city: 'Taipei',
   };
 
   orig_body_className = document.body.className;
@@ -35,7 +36,10 @@ export class Login2Component implements OnInit {
     document.body.className = 'bg-gradient-primary';
     // 這邊是模擬從遠端抓資料回來
     setTimeout(() => {
-      this.form.setValue(this.data);
+      // this.form.setValue(this.data);
+      // data多一個city，但form沒有，用setValue會噴錯，改用patchValue則不會
+      // 了解何時改用set，何時改用patch
+      this.form.patchValue(this.data);
     }, 2000)
   }
 
@@ -81,4 +85,7 @@ export class Login2Component implements OnInit {
   //     control.control.disable();
   //   }
   // }
+  resetForm() {
+    this.form.reset(this.data);
+  }
 }
